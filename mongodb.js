@@ -5,26 +5,35 @@ U|pdate  - Atualizar
 D|elete  - Deletar
 */
 const mongodb = require('mongodb')
-const MongoClient = mongodb.MongoClient
-
+const { MongoClient, ObjectID } = require('mongodb')
+ 
 const connectionURL = 'mongodb://127.0.0.1:27017'
 const databaseName = 'task-manager'
 
-MongoClient.connect(connectionURL, { useNewUrlParser: true }, (error, client) => {
+// db.collection('user').insertOne = Create   - C
+// db.collection('user').find      = Read     - R
+// db.collection('user').updateOne = Update   - U
+// db.collection('user').deleteOne = Delete   - D
+MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (error, client) => {
     if(error){
         return console.log('Unable to connect to database!')
     }
-    // Criando nova ''tabela'' --> Create
+
     const db = client.db(databaseName)
     
-    db.collection('users').insertOne({
-        name: 'Victor',
-        age: 20
-    }, (e, result) => {
-        if(e){
-            return console.log('Unable to insert user')
-        }
-        // result.ops = result operation = objeto que foi guardado no banco
-        console.log(result.ops)
+    const promise = db.collection('users').deleteOne({ age: 44 }).then((r) => {
+        console.log(r.result)
+    }).catch((e) => {
+        console.log(e)
     })
+
+    
+    
+    
+    
+    // promise.then((result) => {
+    //     console.log(result.result)
+    // }).catch((e) => {
+    //     console.log('Error!')
+    // })
 })
