@@ -21,7 +21,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: 
 
     const db = client.db(databaseName)
     
-    const promise = db.collection('users').deleteOne({ age: 44 }).then((r) => {
+    const promise = db.collection('users').insertMany([
+
+    ]).then((r) => {
         console.log(r.result)
     }).catch((e) => {
         console.log(e)
