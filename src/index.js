@@ -37,6 +37,7 @@ app.get('/users/:id', (req, res) => {
     }).catch(  e => res.status(500).send(console.log(e))  )
 
 })
+// ----------------------- Remover um usuario ----------------------------//
 
 
 // ----------------------- Add uma task ------------------------------ //
